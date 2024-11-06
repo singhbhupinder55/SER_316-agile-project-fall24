@@ -52,7 +52,7 @@ class guessTest {
     @Test
     @DisplayName("TC5 - Duplicate Correct Guess Test")
     void testDuplicateCorrectGuess() throws GuessOutOfRangeException {
-        game.setCorrectNumber(42);
+        game.setCorrectNumber(50);
         game.makeGuess("42"); // First correct guess
         assertEquals(4.0, game.makeGuess("42"), "Duplicate correct guess should return 4.0");
     }
@@ -72,20 +72,23 @@ class guessTest {
     @Test
     @DisplayName("TC8 - Game Over After 10 Incorrect Guesses")
     void testGameOverAfter10IncorrectGuesses() throws GuessOutOfRangeException {
-        game.setCorrectNumber(42);
+        game.setCorrectNumber(40);
         for (int i = 0; i < 10; i++) {
-            game.makeGuess("50"); // Incorrect guesses
+            game.makeGuess("72"); // Incorrect guesses
         }
-        assertEquals(5.0, game.makeGuess("50"), "After 10 incorrect guesses, game should be over and return 5.0");
+        assertEquals(5.0, game.makeGuess("72"), "After 10 incorrect guesses, game should be over and return 5.0");
     }
 
     @Test
     @DisplayName("TC9 - Guess After Game Over")
     void testGuessAfterGameOver() throws GuessOutOfRangeException {
-        game.setCorrectNumber(42);
+        game.setCorrectNumber(40);
         for (int i = 0; i < 10; i++) {
-            game.makeGuess("50"); // Incorrect guesses to trigger game over
+            game.makeGuess("40"); // Incorrect guesses to trigger game over
         }
-        assertEquals(6.0, game.makeGuess("50"), "Guess after game over should return 6.0");
+        assertEquals(6.0, game.makeGuess("40"), "Guess after game over should return 6.0");
     }
+
+
+
 }
