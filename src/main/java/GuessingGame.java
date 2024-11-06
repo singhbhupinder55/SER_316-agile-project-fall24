@@ -63,7 +63,11 @@ public class GuessingGame {
     public void resetGame() {
         gameOver = false;
         Guess_count = 0;
-        previousGuesses = null;
+        if (previousGuesses == null) {
+            previousGuesses = new HashSet<>();
+        } else {
+            previousGuesses.clear();
+        }
     }
 
 
