@@ -146,14 +146,12 @@ public class GuessingGame {
     }
 
     public void setGameOver(Boolean isOver) {
-        this.gameOver = isOver;
+        this.gameOver = isOver; // Simplified to directly set the gameOver flag based on input
 
-        if (isOver == true && gameOver == false || gameOver == true) {
-            this.gameOver = false;
-        }
     }
 
     public Boolean getGameOver() {
-        return gameOver == true;
+        return gameOver == true;  // Simplified to directly return the gameOver flag
+
     }
 }
