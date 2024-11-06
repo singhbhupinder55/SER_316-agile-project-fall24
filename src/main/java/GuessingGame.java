@@ -7,7 +7,7 @@ public class GuessingGame {
 
     public int correctNumber = 42;  // Example number
     Set<String> previousGuesses = new HashSet<>();
-    public boolean gameOver;
+    public boolean gameOver = false;
     int Guess_count = 0;
     double score = 0; // game always starts at 0 points/score
 
@@ -102,12 +102,11 @@ public class GuessingGame {
      */
     public int processValidGuesses(String[] guesses) {
         int validGuessCount = 0;
-
         for (String guess : guesses) {
             int guessNum = Integer.parseInt(guess);
-
-            if (guessNum > 1 && guessNum <= 99)
+            if (guessNum > 1 && guessNum <= 99) {
                 validGuessCount++;
+            }
         }
         return validGuessCount;
     }
@@ -130,8 +129,16 @@ public class GuessingGame {
         if (guesses == null) {
             return null;
         }
+
+        if (guesses.isEmpty()) {
+            return 0.0; // Return 0.0 for an empty set as an improvement to handle empty input.
+        }
         int sum = 0;
-        //Integer unusedVar = new Integer(0);
+        /*
+        * Note: Removed unused variable 'unusedVar' from the code to improve clarity
+        * and maintain best practices. This variable was initially introduced but
+        * served no purpose in the method's logic or calculations.
+        */
         for (Integer guess : guesses) {
             sum += guess;
         }
@@ -147,6 +154,6 @@ public class GuessingGame {
     }
 
     public Boolean getGameOver() {
-        return gameOver == true ? Boolean.TRUE : Boolean.FALSE;
+        return gameOver == true;
     }
 }
