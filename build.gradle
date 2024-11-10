@@ -42,15 +42,18 @@ apply plugin: 'checkstyle'
  // Configure Checkstyle
 checkstyle {
   // Keep checkstyle a little quieter
+
 ignoreFailures = true
 showViolations = false
+ }
+ checkstyle {
+     configFile = file("config/checkstyle/checkstyle.xml") // Make sure this path is correct
+     toolVersion = "8.8"
  }
 
  tasks.withType(Checkstyle) {
   }
-checkstyle {
-   toolVersion = "8.41"
- }
+
 
 
 ///////////////////////////////////////////////////////////////////////
