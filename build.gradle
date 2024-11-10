@@ -49,7 +49,7 @@ showViolations = false
  tasks.withType(Checkstyle) {
   }
 checkstyle {
-   toolVersion = "8.8"
+   toolVersion = "8.41"
  }
 
 
