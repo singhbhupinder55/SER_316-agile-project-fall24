@@ -25,7 +25,7 @@ class BlackBoxTest {
                 );
     }
 
-   //Reset the game instance before each game
+
     @BeforeEach
     void setUp() {
         game = new GuessingGame();
@@ -52,7 +52,8 @@ class BlackBoxTest {
     void testTooHighGuess(GuessingGame game) throws GuessOutOfRangeException {
         game.setCorrectNumber(42);
         double result = game.makeGuess("50");
-        System.out.println("Testing instance: " + game.getClass().getSimpleName() + ", Expected: 1.08, Actual: " + result);
+        System.out.println("Testing instance: " + game.getClass().getSimpleName()
+                + ", Expected: 1.08, Actual: " + result);
         assertEquals(1.08, result, "Too high guess should return 1.08");
 
 
@@ -90,14 +91,16 @@ class BlackBoxTest {
     @MethodSource("provideGuessingGameInstances")
     @DisplayName("TC6 - Guess Below Valid Range (0)")
     void testGuessBelowValidRange(GuessingGame game) {
-        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("0"), "Guess below valid range should throw exception");
+        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("0"),
+                "Guess below valid range should throw exception");
     }
 
     @ParameterizedTest
     @MethodSource("provideGuessingGameInstances")
     @DisplayName("TC7 - Guess Above Valid Range (105)")
     void testGuessAboveValidRange(GuessingGame game) {
-        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("105"), "Guess above valid range should throw exception");
+        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("105"),
+                "Guess above valid range should throw exception");
     }
 
     @ParameterizedTest
@@ -112,7 +115,7 @@ class BlackBoxTest {
     @ParameterizedTest
     @MethodSource("provideGuessingGameInstances")
     @DisplayName("TC9 - Upper Boundary Valid Guess (100)")
-    void testUpperBoundaryGuess(GuessingGame game) throws GuessOutOfRangeException {
+    void testUpperBoundaryGuess(GuessingGame game)  {
         String upperBoundaryGuess = "99";
         try {
             double result = game.makeGuess(upperBoundaryGuess);
@@ -133,13 +136,12 @@ class BlackBoxTest {
         game.setCorrectNumber(42);
         for (int i = 0; i < 10; i++) {
             double result = game.makeGuess(incorrectGuess);
+
         // For the first 9 guesses, we expect a non-game-over response
-        if (i < 10) {
             assertNotEquals(5.0, result, "Game should not be over before the 10th guess");
-        } else {
             // On the 10th incorrect guess, we expect a 5.0 response indicating game over
-            assertEquals(5.0, result, "After 10 incorrect guesses, should return 5.0 indicating game over");
-        }
+            assertEquals(5.0, result,
+                    "After 10 incorrect guesses, should return 5.0 indicating game over");
     }
     }
 

@@ -1,6 +1,5 @@
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class GuessingGame {
@@ -8,7 +7,7 @@ public class GuessingGame {
     public int correctNumber = 42;  // Example number
     Set<String> previousGuesses = new HashSet<>();
     public boolean gameOver = false;
-    int Guess_count = 0;
+    int guessCount = 0;
     double score = 0; // game always starts at 0 points/score
 
     public void setCorrectNumber(int correctNumber) {
@@ -24,9 +23,8 @@ public class GuessingGame {
      * - 4.0: Guess was already made
      * - 5.0: Game over after 10 incorrect guesses, should set flag accordingly
      * - 6.0: Guess made after game is over
-     * <p>
      * The score is only set as described above.
-     * The method should also change Guess_count when appropriate and previousGuesses to keep track
+     * The method should also change guessCount when appropriate and previousGuesses to keep track
      * of what has been guessed already. Only valid guesses will count toward these.
      *
      * @param guess the user's guess as a string
@@ -40,10 +38,10 @@ public class GuessingGame {
             return 6.0; // Guess made after game is over
         }
         // Increment guess count for valid guesses
-        Guess_count++;
+        guessCount++;
 
         // Check if game should be marked as over after 10 incorrect guesses
-        if (Guess_count > 10) {
+        if (guessCount > 10) {
             gameOver = true;
             return 5.0; // Return 5.0 when game is over after 10 incorrect guesses
         }
@@ -112,18 +110,21 @@ public class GuessingGame {
     }
 
     /**
-     * Resets the game
+     * Resets the game.
      */
     public void resetGame() {
         gameOver = false;
-        Guess_count = 0;
+        guessCount = 0;
         previousGuesses = new HashSet<>();
 
     }
 
 
     /**
-     * Calculates the average of an array full of numbers
+     * Calculates the average of an array full of numbers.
+     *
+     * @param guesses a set of integer guesses
+     * @return the average of the guesses as a Double.
      */
     public Double calculateAverage(Set<Integer> guesses) {
         if (guesses == null) {
@@ -151,7 +152,7 @@ public class GuessingGame {
     }
 
     public Boolean getGameOver() {
-        return gameOver == true;  // Simplified to directly return the gameOver flag
+        return gameOver;  // Simplified to directly return the gameOver flag
 
     }
 }

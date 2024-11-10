@@ -1,17 +1,13 @@
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-class guessTest {
+class GuessTest {
 
     private GuessingGame game;
 
@@ -60,13 +56,15 @@ class guessTest {
     @Test
     @DisplayName("TC6 - Out-of-Bounds Guess (Low)")
     void testGuessBelowValidRange() {
-        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("0"), "Guess below valid range should throw exception");
+        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("0"),
+                "Guess below valid range should throw exception");
     }
 
     @Test
     @DisplayName("TC7 - Out-of-Bounds Guess (High)")
     void testGuessAboveValidRange() {
-        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("105"), "Guess above valid range should throw exception");
+        assertThrows(GuessOutOfRangeException.class, () -> game.makeGuess("105"),
+                "Guess above valid range should throw exception");
     }
 
     @Test
@@ -76,7 +74,8 @@ class guessTest {
         for (int i = 0; i < 10; i++) {
             game.makeGuess("72"); // Incorrect guesses
         }
-        assertEquals(5.0, game.makeGuess("72"), "After 10 incorrect guesses, game should be over and return 5.0");
+        assertEquals(5.0, game.makeGuess("72"),
+                "After 10 incorrect guesses, game should be over and return 5.0");
     }
 
     @Test
@@ -86,7 +85,8 @@ class guessTest {
         for (int i = 0; i < 10; i++) {
             game.makeGuess("40"); // Incorrect guesses to trigger game over
         }
-        assertEquals(6.0, game.makeGuess("40"), "Guess after game over should return 6.0");
+        assertEquals(6.0, game.makeGuess("40"),
+                "Guess after game over should return 6.0");
     }
 
 
