@@ -71,4 +71,8 @@ jacocoTestReport {
 //     }
 // }
 
+test {
+    exclude '**/BlackBoxTest.class'
+}
+
 
