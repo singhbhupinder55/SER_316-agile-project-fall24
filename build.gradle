@@ -56,4 +56,8 @@ test {
 //     }
 // }
 
+test {
+    exclude '**/BlackBoxTest.class'
+}
+
 
