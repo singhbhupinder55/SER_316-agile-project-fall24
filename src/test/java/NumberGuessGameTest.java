@@ -181,10 +181,11 @@ class NumberGuessGameTest {
         game.resetGame();
 
         // After reset, verify all values are set to initial states
-        assertFalse(game.gameOver, "Game should not be over after reset");
+        assertFalse(game.isGameOver(), "Game should not be over after reset"); //SER316 TASK 2 SPOT-BUGS FIX
         assertEquals(0, game.guessCount, "Guess count should be 0 after reset");
         assertTrue(game.previousGuesses.isEmpty(), "Previous guesses should be empty after reset");
     }
+
 
     // test's for setGameOver` and `getGameOver` methods.
     /**

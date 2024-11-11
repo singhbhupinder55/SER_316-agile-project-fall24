@@ -4,9 +4,9 @@ import java.util.Set;
 
 public class GuessingGame {
 
-    public int correctNumber = 42;  // Example number
+    private int correctNumber = 42;  // SER316 TASK 2 SPOT-BUGS FIX
     Set<String> previousGuesses = new HashSet<>();
-    public boolean gameOver = false;
+    private boolean gameOver = false; //SER316 TASK 2 SPOT-BUGS FIX
     int guessCount = 0;
     double score = 0; // game always starts at 0 points/score
 
@@ -155,4 +155,10 @@ public class GuessingGame {
         return gameOver;  // Simplified to directly return the gameOver flag
 
     }
+
+    public boolean isGameOver() { // SER316 TASK 2 SPOT-BUGS FIX
+        return gameOver;
+    }
+
+
 }
