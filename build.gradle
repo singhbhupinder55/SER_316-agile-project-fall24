@@ -26,7 +26,7 @@ test {
     exclude '**/BlackBoxTest.class'
 }
 
-pply plugin: 'checkstyle'
+apply plugin: 'checkstyle'
 checkstyle {
     toolVersion = "8.8"
     ignoreFailures = true
