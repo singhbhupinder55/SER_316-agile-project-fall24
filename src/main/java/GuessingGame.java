@@ -115,8 +115,11 @@ public class GuessingGame {
     public void resetGame() {
         gameOver = false;
         guessCount = 0;
-        previousGuesses = new HashSet<>();
-
+        if (previousGuesses == null) {
+            previousGuesses = new HashSet<>();
+        } else {
+            previousGuesses.clear();
+        }
     }
 
 
@@ -140,6 +143,7 @@ public class GuessingGame {
         * and maintain best practices. This variable was initially introduced but
         * served no purpose in the method's logic or calculations.
         */
+
         for (Integer guess : guesses) {
             sum += guess;
         }

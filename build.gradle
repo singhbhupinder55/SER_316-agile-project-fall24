@@ -1,5 +1,6 @@
- plugins {
-      id "com.github.spotbugs" version "5.0.13"
+
+plugins {
+    id "com.github.spotbugs" version "5.0.13"
      id "checkstyle"
 }
 
@@ -22,17 +23,18 @@ mainClassName = 'Main'
 
 test {
     useJUnitPlatform()
+    exclude '**/BlackBoxTest.class'
 }
 
- apply plugin: 'checkstyle'
-  checkstyle {
-      toolVersion = "8.8"
+pply plugin: 'checkstyle'
+checkstyle {
+    toolVersion = "8.8"
     ignoreFailures = true
     showViolations = false
-  }
+    configFile = file("config/checkstyle/checkstyle.xml") // Ensure this path is correct
+}
 
-  tasks.withType(Checkstyle) {
-  }
+tasks.withType(Checkstyle) {}
 
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
@@ -49,22 +51,6 @@ jacocoTestReport {
     }
 }
 
-apply plugin: 'checkstyle'
- // Configure Checkstyle
-checkstyle {
-  // Keep checkstyle a little quieter
-
-ignoreFailures = true
-showViolations = false
- }
- checkstyle {
-     configFile = file("config/checkstyle/checkstyle.xml") // Make sure this path is correct
-     toolVersion = "8.8"
- }
-
- tasks.withType(Checkstyle) {
-  }
-
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -72,11 +58,12 @@ showViolations = false
 ///////////////////////////////////////////////////////////////////////
 // To generate an HTML report instead of XML
  spotbugs {
-     toolVersion = '4.8.4'
-    ignoreFailures = true
-     showProgress = true
+    toolVersion = '4.8.4'
+     ignoreFailures = true
+    showProgress = true
      effort = 'max'
-     reportLevel = 'low'
+    reportLevel = 'low'
+
  }
 
  tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
@@ -86,8 +73,5 @@ showViolations = false
      }
  }
 
-test {
-    exclude '**/BlackBoxTest.class'
-}
 
 
