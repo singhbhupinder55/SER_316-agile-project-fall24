@@ -1,8 +1,9 @@
  plugins {
       id "com.github.spotbugs" version "5.0.13"
-      id "checkstyle"
- }
+     id "checkstyle"
+}
 
+apply plugin: 'jacoco'
 apply plugin: 'application'
 
 repositories {
@@ -25,16 +26,45 @@ test {
 
  apply plugin: 'checkstyle'
   checkstyle {
-    // Keep checkstyle a little quieter
+      toolVersion = "8.8"
     ignoreFailures = true
     showViolations = false
   }
 
   tasks.withType(Checkstyle) {
   }
-  checkstyle {
-      toolVersion = "8.8"
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
+
+apply plugin: 'checkstyle'
+ // Configure Checkstyle
+checkstyle {
+  // Keep checkstyle a little quieter
+
+ignoreFailures = true
+showViolations = false
+ }
+ checkstyle {
+     configFile = file("config/checkstyle/checkstyle.xml") // Make sure this path is correct
+     toolVersion = "8.8"
+ }
+
+ tasks.withType(Checkstyle) {
   }
+
 
 
 ///////////////////////////////////////////////////////////////////////
