@@ -19,7 +19,7 @@ public class GuessingGame {
      * @return a Set containing previous guesses.
      */
     public Set<String> getPreviousGuesses() {  // Getter method for previousGuesses
-        return previousGuesses;
+        return new HashSet<>(previousGuesses); // Return a new copy to protect the internal set
     }
 
     /**
