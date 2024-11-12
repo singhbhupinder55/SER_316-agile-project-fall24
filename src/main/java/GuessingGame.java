@@ -5,15 +5,30 @@ import java.util.Set;
 public class GuessingGame {
 
     private int correctNumber = 42;  // SER316 TASK 2 SPOT-BUGS FIX
-    Set<String> previousGuesses = new HashSet<>();
+    private Set<String> previousGuesses = new HashSet<>();
     private boolean gameOver = false; //SER316 TASK 2 SPOT-BUGS FIX
-    int guessCount = 0;
-    double score = 0; // game always starts at 0 points/score
+    private int guessCount = 0;
+    private double score = 0; // game always starts at 0 points/score
 
     public void setCorrectNumber(int correctNumber) {
         this.correctNumber = correctNumber;
     } // allows to set another number to guess
 
+    /**
+     * Gets the previous guesses made in the game.
+     * @return a Set containing previous guesses.
+     */
+    public Set<String> getPreviousGuesses() {  // Getter method for previousGuesses
+        return previousGuesses;
+    }
+
+    /**
+     * Gets the current count of guesses.
+     * @return the count of guesses made.
+     */
+    public int getGuessCount() {  // Getter method for guessCount
+        return guessCount;
+    }
     /**
      * Makes a guess and returns a code based on the outcome.
      * - 0: Correct guess
@@ -31,6 +46,7 @@ public class GuessingGame {
      * @return a double indicating the outcome of the guess
      * @throws GuessOutOfRangeException if the guess is outside the allowed range (1-100)
      */
+
     public double makeGuess(String guess) throws GuessOutOfRangeException {
 
         // Check if the game is over
@@ -115,11 +131,7 @@ public class GuessingGame {
     public void resetGame() {
         gameOver = false;
         guessCount = 0;
-        if (previousGuesses == null) {
-            previousGuesses = new HashSet<>();
-        } else {
-            previousGuesses.clear();
-        }
+        previousGuesses.clear();
     }
 
 
@@ -138,11 +150,6 @@ public class GuessingGame {
             return 0.0; // Return 0.0 for an empty set as an improvement to handle empty input.
         }
         int sum = 0;
-        /*
-        * Note: Removed unused variable 'unusedVar' from the code to improve clarity
-        * and maintain best practices. This variable was initially introduced but
-        * served no purpose in the method's logic or calculations.
-        */
 
         for (Integer guess : guesses) {
             sum += guess;
