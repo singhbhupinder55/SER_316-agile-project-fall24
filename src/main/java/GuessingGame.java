@@ -226,6 +226,14 @@ public class GuessingGame {
         return gameState.getGameOver(); // Delegate to GameState
     }
 
+    /**
+     * Gets the correct number for the game.
+     *
+     * @return the correct number.
+     */
+    public int getCorrectNumber() {
+        return correctNumber;
+    }
 
 
 

@@ -33,6 +33,13 @@
     </properties>
 </rule>
 <rule ref="category/java/bestpractices.xml/LooseCoupling" />
-
+	<rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals" />
+	<rule ref="category/java/design.xml/TooManyMethods" />
+	<rule ref="category/java/design.xml/UseUtilityClass" />
+	<rule ref="category/java/codestyle.xml/FieldDeclarationsShouldBeAtStartOfClass" />
+	<rule ref="category/java/bestpractices.xml/AvoidReassigningParameters" />
+	<rule ref="category/java/design.xml/LawOfDemeter" />
+	<rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts" />
+	<rule ref="category/java/design.xml/ExcessiveParameterList" />
 
 </ruleset>

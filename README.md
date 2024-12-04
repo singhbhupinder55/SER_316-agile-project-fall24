@@ -1,3 +1,54 @@
+# Task 1: PMD Setup and Metrics Analysis
+
+## Overview
+
+For Task 1, the PMD plugin was integrated into the project to analyze the code quality based on predefined rules in the `ruleset.xml` file. The PMD report highlights key metrics and rule violations to help identify areas for refactoring and code improvement.
+
+## PMD Setup
+
+1. **Branch Creation**:
+    - A new branch `metrics1` was created from the `Blackbox` branch to isolate Task 1 changes.
+
+2. **Configuration**:
+    - The PMD plugin was added to the `build.gradle` file.
+    - The `ruleset.xml` file, provided as part of the assignment, was placed in the same directory as `build.gradle`.
+    - PMD was configured to generate HTML reports and use the custom rule set.
+
+3. **Execution**:
+    - The `gradle build` command was run to analyze the code, resulting in a report located at:
+        - `build/reports/pmd/main.html`.
+
+## PMD Metrics and Findings
+
+| **File**          | **Line** | **Rule**                    | **Explanation**                                                                                                                                          |
+|--------------------|----------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `GuessingGame.java` | 1        | `CouplingBetweenObjects`    | High coupling due to excessive object dependencies.                                                                                                     |
+| `GuessingGame.java` | 48       | `CyclomaticComplexity`       | Method `processValidGuesses(String)` exceeds complexity threshold (4).                                                                                   |
+| `GuessingGame.java` | 73       | `CyclomaticComplexity`       | Method `calculateAverage(Set)` exceeds complexity threshold (3).                                                                                         |
+| `GuessingGame.java` | 85       | `CyclomaticComplexity`       | Method `setGameOver(Boolean)` exceeds complexity threshold (4).                                                                                          |
+| `GuessingGame.java` | 93       | `CyclomaticComplexity`       | Method `getGameOver()` exceeds complexity threshold (2).                                                                                                 |
+| `Main.java`        | 2        | `CyclomaticComplexity`       | Method `main(String)` exceeds complexity threshold (2).                                                                                                  |
+
+## Screenshot of the PMD Report
+Below is the screenshot of the PMD report:
+
+![PMD Report Screenshot](reportsImage/pmdReporttask1.png)
+
+## Analysis of Results
+
+1. **High Coupling**:
+    - The `CouplingBetweenObjects` rule was violated in `GuessingGame.java` due to a high number of object dependencies.
+    - This can make the code harder to test and maintain.
+
+2. **Cyclomatic Complexity**:
+    - Multiple methods exceeded the complexity thresholds set in the `ruleset.xml` file.
+    - High complexity can make methods harder to understand and maintain.
+
+## Conclusion
+
+The PMD analysis identified several areas of improvement in the code, primarily focusing on high coupling and cyclomatic complexity. These metrics highlight issues that could lead to reduced maintainability and increased difficulty in testing. For example, methods like `processValidGuesses` and `setGameOver` have higher-than-ideal complexity, which suggests they should be simplified or refactored to improve readability and maintainability.
+
+
 # Task 2: PMD Analysis Comparison
 
 ## Overview
@@ -140,6 +191,145 @@ The project contained duplicate and similar code in various areas, including sta
 3. **Testing**
     - All the tests still workings.
 
-#### Remaining Work (if any):
+#### Remaining Work:
 As of now, all duplicate or similar code has been addressed, and the changes have been implemented. The cyclomatic complexity of some methods is still slightly high but within acceptable thresholds due to the nature of their logic.
+
+
+## Task 4: Identifying Code Smells
+
+### Overview of Code Smells and Added Rules
+Code smells are indicators of potential issues in code design and implementation that may hinder readability, maintainability, or scalability. For Task 4, we enhanced the PMD ruleset to detect specific code smells in the project. The following rules were added:
+
+- **Cyclomatic Complexity**: Identifies methods with excessive decision-making logic.
+- **Coupling Between Objects**: Detects high coupling between classes, suggesting the need for modularization.
+- **Excessive Class/Method Length**: Flags overly long classes or methods, promoting single-responsibility design.
+- **Static Methods**: Detects improper use of static methods and suggests using utility classes or singleton patterns.
+- **Avoid Duplicate Literals**: Helps reduce redundant strings or literals in the code.
+- **Too Many Methods**: Flags classes with an excessive number of methods, indicating potential overloading of responsibilities.
+- **Field Declarations Should Be At Start Of Class**: Ensures consistent ordering of fields for better readability.
+- **Avoid Reassigning Parameters**: Discourages modifying input parameters directly, which could lead to bugs.
+- **Law of Demeter**: Highlights violations of the Law of Demeter, promoting better encapsulation.
+- **Avoid Deeply Nested If Statements**: Encourages refactoring of deeply nested conditions for clarity.
+- **Excessive Parameter List**: Flags methods with too many parameters, suggesting the need for better encapsulation or design.
+
+### Findings from Updated PMD Report
+After running PMD with the updated ruleset, the following code smells were identified:
+1. **High Coupling**:
+   - The `GuessingGame` class was flagged for having too many dependencies, suggesting decoupling and modularization.
+2. **Cyclomatic Complexity**:
+   - Methods such as `makeGuess`, `handleOutcome`, and `processValidGuesses` exceeded the complexity threshold, indicating they need simplification.
+3. **Static Methods**:
+   - Classes like `GameStatistics`, `GuessingGameFactory`, and `InputValidator` were flagged for having only static methods, which could be converted to utility classes or restructured for better design.
+4. **Excessive Parameter List**:
+   - Some methods were flagged for having too many parameters, which could be simplified by creating encapsulating objects.
+5. **Avoid Duplicate Literals**:
+   - Repeated string literals were detected, suggesting they should be extracted into constants for reuse.
+6. **Law of Demeter**:
+   - Violations were identified, suggesting that some methods accessed too many intermediate objects, reducing encapsulation.
+
+### Justification for Added Rules
+The added rules aim to address specific areas of improvement:
+- **Maintainability**: By identifying overly complex methods, deep nesting, and duplicate literals, the rules promote cleaner and more maintainable code.
+- **Readability**: Encouraging field declarations at the start of classes and refactoring excessive parameter lists improves readability.
+- **Design Principles**: Enforcing the Law of Demeter, avoiding static methods, and limiting coupling aligns with best design practices.
+
+### Actions Taken
+- The ruleset file was updated with new rules targeting common code smells, as outlined above.
+- PMD was rerun, and the flagged issues were analyzed and documented.
+- The new ruleset helps ensure adherence to clean coding practices as taught in lectures and Fowler's book.
+
+### Screenshots
+Below is the PMD report generated after adding the new rules and running it on the project:
+![PMD Report](reportsImage/task4report.png)
+
+---
+
+This analysis concludes Task 4 and ensures a thorough identification of code smells, aiding future refactoring efforts.
+
+
+## Task 5: Final Check 
+
+### Analysis of the Current Codebase
+
+After reviewing the refactoring work, PMD reports, and the current codebase, there are several observations on areas for further improvement. This section highlights potential refactorings that could enhance code quality, along with a justification of why the code is in a relatively good state after refactoring.
+
+---
+
+### Areas for Improvement
+
+1. **Cyclomatic Complexity**
+   - **Problem**: Methods such as `makeGuess`, `handleOutcome`, and `processValidGuesses` still have a cyclomatic complexity higher than desirable.
+   - **Why This Matters**: High complexity makes methods harder to read, test, and maintain.
+   - **Suggested Solution**: Break these methods into smaller, focused helper methods that adhere to the Single Responsibility Principle.
+
+2. **Single Responsibility Principle (SRP) Violations**
+   - **Class Affected**: `GuessingGame`.
+   - **Problem**: The `GuessingGame` class manages game state, scoring, and guesses, violating SRP.
+   - **Suggested Solution**:
+      - Introduce a dedicated `ScoreManager` class for scoring logic.
+      - Create a `GuessManager` class to handle guess validation and management.
+
+3. **Utility Classes with Static Methods**
+   - **Classes Affected**: `GameStatistics` and `InputValidator`.
+   - **Problem**: These classes currently only contain static methods, reducing flexibility for future extensions.
+   - **Suggested Solution**:
+      - Add a private constructor to indicate their utility purpose.
+      - Alternatively, convert them into instance-based classes for more extensibility.
+
+4. **Long Methods**
+   - **Methods Affected**: `makeGuess` and `processValidGuesses`.
+   - **Problem**: Long methods are harder to read and understand.
+   - **Suggested Solution**: Refactor these methods by extracting smaller helper methods to handle specific responsibilities.
+
+5. **Excessive Parameter Lists**
+   - **Methods Affected**: `processValidGuesses`.
+   - **Problem**: Long parameter lists reduce readability and maintainability.
+   - **Suggested Solution**: Use a `Range` object to encapsulate lower and upper bounds into a single parameter.
+
+6. **Tight Coupling**
+   - **Class Affected**: `GuessingGame`.
+   - **Problem**: Direct access to `GameState` methods creates unnecessary coupling.
+   - **Suggested Solution**: Encapsulate `GameState` logic within higher-level methods in `GuessingGame`.
+
+---
+
+### Why the Code Is in a Good State
+
+Despite the areas for potential improvement, the code has improved significantly through the refactoring process:
+
+1. **Improved Adaptability**:
+   - The use of the `DifficultyLevel` enum simplifies changes to difficulty levels.
+   - The `ScoringStrategy` interface enables flexible integration of different scoring mechanisms.
+
+2. **Reduced Code Duplication**:
+   - Refactoring consolidated redundant logic, such as guess validation and scoring calculations.
+
+3. **Improved Testability**:
+   - Breaking the logic into smaller components (e.g., `GameState`, `ScoringStrategy`) makes it easier to write and run unit tests for individual parts.
+
+4. **Alignment with Design Patterns**:
+   - The introduction of the Strategy Pattern for scoring demonstrates adherence to clean code principles.
+
+---
+
+### Remaining Code Smells and Suggestions
+
+The following smells remain but are not critical to fix immediately:
+
+1. **High Coupling**:
+   - Some classes, such as `GuessingGame`, directly access multiple components (`GameState`, `InputValidator`), creating dependencies that could be reduced by better encapsulation.
+
+2. **Potential for Over-Engineering**:
+   - While the `ScoringStrategy` interface adds flexibility, it may not be necessary for such a small application. Simplifying this might reduce code overhead.
+
+3. **Excessive Method Length**:
+   - Methods like `makeGuess` are still longer than ideal. While this does not currently affect functionality, it can impact future readability.
+
+---
+
+### Final Conclusion
+
+The refactored code is significantly better than its initial state, demonstrating improved adaptability, reduced duplication, and better adherence to design principles. However, addressing the areas highlighted above would further improve code quality, making it more maintainable and scalable in the long term.
+
+
 

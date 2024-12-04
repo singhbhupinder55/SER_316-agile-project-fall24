@@ -82,7 +82,13 @@ pmd {
          html.required.set(true)
         xml.required.set(false)
      }
+
  }
+
+tasks.named('run') {
+    standardInput = System.in
+}
+
 
 
 
