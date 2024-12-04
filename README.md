@@ -1,3 +1,9 @@
+# Module 6 Assignment
+
+**Name:** Bhupinder Singh  
+**GitHub Repository Link:** [ser316-fall24B-bsingh55 (Metrics2 Branch)](https://github.com/singhbhupinder55/ser316-fall24B-bsingh55/tree/metrics2)
+
+
 # Task 1: PMD Setup and Metrics Analysis
 
 ## Overview
