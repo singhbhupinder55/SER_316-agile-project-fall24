@@ -1,6 +1,7 @@
  plugins {
       id "com.github.spotbugs" version "5.0.13"
       id "checkstyle"
+     id 'pmd' // Added PMD plugin
  }
 
 apply plugin: 'application'
@@ -35,6 +36,17 @@ test {
   checkstyle {
       toolVersion = "8.8"
   }
+
+
+ // pmd gradle command's added her
+ apply plugin: "pmd"
+ pmd {
+     ignoreFailures = true
+     sourceSets = [sourceSets.main]
+     reportsDir = file("$project.buildDir/reports/pmd")
+     ruleSets = []
+     ruleSetConfig = resources.text.fromFile('ruleset.xml')
+ }
 
 
 ///////////////////////////////////////////////////////////////////////
